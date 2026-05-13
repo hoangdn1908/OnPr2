@@ -1,9 +1,12 @@
 package Project_Student_Management;
 
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.jar.JarEntry;
 
-public class StudentManager<T extends Student> {
+public class StudentManager<T extends Student>  implements Serializable {
      private ArrayList<T> list;
 
      public StudentManager()
@@ -72,6 +75,33 @@ public class StudentManager<T extends Student> {
              }
          }
          return null;
+     }
+
+     public void save(String fileName)
+     {
+         try
+         {
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+             objectOutputStream.writeObject(list);
+             objectOutputStream.close();
+         }
+         catch (IOException e)
+         {
+             System.out.println(e.getMessage());
+         }
+     }
+
+     public void load(String fileName)
+     {
+         try {
+             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
+             list = (ArrayList<T>) objectInputStream.readObject();
+             objectInputStream.close();
+         }
+         catch (IOException | ClassNotFoundException e)
+         {
+             System.out.println(e.getMessage());
+         }
      }
 }
 

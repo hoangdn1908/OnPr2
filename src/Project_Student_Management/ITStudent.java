@@ -1,6 +1,8 @@
 package Project_Student_Management;
 
-public class ITStudent extends Student{
+import java.io.Serializable;
+
+public class ITStudent extends Student implements Serializable {
     private double javaScore;
     private double csharpScore;
 

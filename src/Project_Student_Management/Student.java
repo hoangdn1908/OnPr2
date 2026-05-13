@@ -1,6 +1,8 @@
 package Project_Student_Management;
 
-public abstract class Student {
+import java.io.Serializable;
+
+public abstract class Student implements Serializable {
     private int id;
     private String name;
     private double score;

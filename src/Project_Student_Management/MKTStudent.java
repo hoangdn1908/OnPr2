@@ -1,6 +1,8 @@
 package Project_Student_Management;
 
-public class MKTStudent extends Student{
+import java.io.Serializable;
+
+public class MKTStudent extends Student implements Serializable {
     private double marketingScore;
     private double salesScore;
 
