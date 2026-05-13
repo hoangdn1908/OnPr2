@@ -1,11 +1,11 @@
 package Store_Game_System;
 
 import jdk.jshell.spi.ExecutionControl;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User  implements Serializable {
     private int id;
     private String name;
     private double balance;
@@ -75,6 +75,36 @@ public class User {
         for(var game : ownedGames)
         {
             game.getInfo();
+        }
+    }
+
+    public void saveUser(String fileName)
+    {
+         try
+         {
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+             objectOutputStream.writeObject(ownedGames);
+             objectOutputStream.writeDouble(balance);
+             objectOutputStream.close();
+         }
+         catch (IOException e)
+         {
+             System.out.println(e.getMessage());
+         }
+    }
+
+    public void loadUser(String fileName)
+    {
+        try
+        {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName));
+            ownedGames = (List<Game>) objectInputStream.readObject();
+            balance = objectInputStream.readDouble();
+            objectInputStream.close();
+        }
+        catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 }

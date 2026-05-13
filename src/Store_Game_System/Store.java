@@ -1,8 +1,8 @@
 package Store_Game_System;
-
+import java.io.*;
 import java.util.HashMap;
 
-public class Store{
+public class Store implements Serializable{
     private HashMap<Game, Integer> store;
 
     public Store()
@@ -49,7 +49,7 @@ public class Store{
 
     public boolean isAvailable(Game game)
     {
-        return store.get(game) > 0;
+        return store.getOrDefault(game, 0) > 0;
     }
 
     public void showStore()
@@ -61,4 +61,33 @@ public class Store{
             System.out.println();
         }
     }
+
+    public void saveStore(String fileName)
+    {
+       try
+       {
+           ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+           objectOutputStream.writeObject(store);
+           objectOutputStream.close();
+       }
+       catch (IOException e)
+       {
+           System.out.println(e.getMessage());
+       }
+    }
+
+    public void loadStore(String fileName)
+    {
+       try
+       {
+           ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
+           store = (HashMap<Game, Integer>) ois.readObject();
+           ois.close();
+       }
+       catch (IOException | ClassNotFoundException e)
+       {
+           System.out.println(e.getMessage());
+       }
+    }
+
 }

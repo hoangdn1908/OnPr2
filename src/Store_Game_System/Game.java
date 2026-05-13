@@ -1,8 +1,9 @@
 package Store_Game_System;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public abstract class Game {
+public abstract class Game implements Serializable {
     protected int id;
     protected String title;
     protected double price;
