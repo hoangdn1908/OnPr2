@@ -6,7 +6,7 @@ public class BankEcxeption extends RuntimeException {
     }
 }
 
-class InsufficientFundsException extends BankEcxeption // khong du tien
+class InsufficientFundsException extends BankEcxeption
 {
     public InsufficientFundsException(String m)
     {
